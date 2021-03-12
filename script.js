@@ -5,10 +5,10 @@ function randomColors() {
   return `(${r}, ${g}, ${b})`;
 }
 
-const colorBall = document.getElementsByClassName('ball');
+const colorsBall = document.getElementsByClassName('ball');
 function generateRandomColors() {
-  for (let key = 0; key < colorBall.length; key += 1) {
-    colorBall[key].style.backgroundColor = `rgb${randomColors()}`;
+  for (let key = 0; key < colorsBall.length; key += 1) {
+    colorsBall[key].style.backgroundColor = `rgb${randomColors()}`;
   }
 }
 
@@ -33,6 +33,7 @@ resetGame.addEventListener('click', rgbColorGuess);
 
 window.onload = function initialize() {
   generateRandomColors();
+  answerInitialState();
 };
 
 const colorOne = document.getElementsByClassName('ball')[0];
@@ -135,14 +136,30 @@ function colorSixSelection() {
 }
 colorSix.addEventListener('click', colorSixSelection);
 
-/* function correctIncorrectGuess() {
-  if () {
-    answer.innerText = 'Acertou!';
-  } else {
-    answer.innerText = 'Errou! Tente novamente!';
+function score() {
+  const challengerScore = document.getElementById('score');
+  let scoreCount = 0;
+  scoreCount = parseInt(challengerScore.innerText, 10);
+  scoreCount += 3;
+  challengerScore.innerText = scoreCount;
+  if (typeof Storage !== 'undefined') {
+    challengerScore.innerText = localStorage.challengerScore;
   }
 }
-*/
+
+for (let key = 0; key < colorsBall.length; key += 1) {
+  colorsBall[key].addEventListener('click', (event) => {
+    if (event.target.style.backgroundColor === `rgb${rgbColorGuess}`) {
+      answer.innerText = 'Acertou!';
+      score();
+      rgbColorGuess();
+      generateRandomColors();
+    } else {
+      answer.innerText = 'Errou! Tente novamente!';
+    }
+  });
+}
+
 /* function saveMyScore() {
   localStorage.myListOfTasks = myListOfTasks.innerHTML;
 }
