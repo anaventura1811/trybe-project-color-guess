@@ -1,7 +1,7 @@
 function randomColors() {
-  const r = Math.random() * 255;
-  const g = Math.random() * 255;
-  const b = Math.random() * 255;
+  const r = Math.ceil(Math.random() * 255);
+  const g = Math.ceil(Math.random() * 255);
+  const b = Math.ceil(Math.random() * 255);
   return `rgb(${r}, ${g}, ${b})`;
 }
 
@@ -18,9 +18,15 @@ function answerInitialState() {
   return answer;
 }
 
+function rgbColorGuess() {
+  const rgbColor = document.getElementById('rgb-color');
+  rgbColor.innerText = `${randomColors()}`;
+  return rgbColor;
+}
 const resetGame = document.querySelector('#reset-game');
 resetGame.addEventListener('click', answerInitialState);
 resetGame.addEventListener('click', generateRandomColors);
+resetGame.addEventListener('click', rgbColorGuess);
 
 window.onload = function initialize() {
   generateRandomColors();
