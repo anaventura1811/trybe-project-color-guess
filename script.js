@@ -18,9 +18,18 @@ function answerInitialState() {
   return answer;
 }
 
+// Para cumprir requisito 2
+
+function randomColor() {
+  const r = Math.ceil(Math.random() * 255);
+  const g = Math.ceil(Math.random() * 255);
+  const b = Math.ceil(Math.random() * 255);
+  return `(${r}, ${g}, ${b})`;
+}
+
 function rgbColorGuess() {
   const rgbColor = document.getElementById('rgb-color');
-  rgbColor.innerText = `${randomColors()}`;
+  rgbColor.innerText = `${randomColor()}`;
   return rgbColor;
 }
 const resetGame = document.querySelector('#reset-game');
